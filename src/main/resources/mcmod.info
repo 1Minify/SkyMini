@@ -1,0 +1,16 @@
+[
+{
+  "modid": "SkyMini",
+  "name": "SkyMini",
+  "description": "Hypixel Skyblock Mod",
+  "version": "${version}",
+  "mcversion": "1.8.9",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["1Minify"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
