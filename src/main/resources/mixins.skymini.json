@@ -1,0 +1,14 @@
+{
+  "package": "at.minify.skymini.mixins",
+  "refmap": "mixins.skymini.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "BlockBreak",
+    "GuiContainer",
+    "RenderScoreboard",
+    "Crops.BlockAccessor",
+    "Crops.CropHitbox",
+    "Crops.WartHitbox",
+    "GuiChat.GuiNewChatMixin"
+  ]
+}
