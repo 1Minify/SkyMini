@@ -4,6 +4,7 @@ import at.minify.skymini.Main;
 import at.minify.skymini.api.util.MiniCommand;
 import at.minify.skymini.core.listener.LowBalling;
 import at.minify.skymini.core.manager.Chat;
+import at.minify.skymini.updater.UpdateManager;
 import at.minify.skymini.util.stats;
 import io.github.moulberry.moulconfig.gui.GuiScreenElementWrapper;
 import io.github.moulberry.moulconfig.gui.MoulConfigEditor;
@@ -34,6 +35,9 @@ public class SMCommand extends MiniCommand {
         String name = getWord(args, 3);
         if(args.length == 0) {
             Main.screenToOpen = new GuiScreenElementWrapper(new MoulConfigEditor<>(GUIConfigMoulConfigProcessor));
+        }
+        if(sub.equalsIgnoreCase("updatee")) {
+            UpdateManager.checkUpdate();
         }
         if(sub.equalsIgnoreCase("server")) {
             Chat.send("Aktueller Server: §e" + Main.getAPI().server.name());

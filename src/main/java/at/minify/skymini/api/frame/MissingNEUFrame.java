@@ -27,7 +27,7 @@ public class MissingNEUFrame {
         }
     }
 
-    public void createFrame() {
+    public static void createFrame() {
         JFrame frame = new JFrame("SkyMini is missing mods!");
         frame.setSize(500, 350);
         frame.setLayout(new BorderLayout());

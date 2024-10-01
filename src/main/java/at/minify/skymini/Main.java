@@ -48,7 +48,6 @@ public class Main {
     public void preInit(FMLPreInitializationEvent event) {
         //new MissingNEUFrame();
 
-
         ServiceContainer.serviceContainer = new ServiceContainer();
         loadFile();
         MinecraftForge.EVENT_BUS.register(this);

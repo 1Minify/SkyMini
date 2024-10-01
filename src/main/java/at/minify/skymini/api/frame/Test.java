@@ -12,20 +12,18 @@ import java.util.concurrent.CompletableFuture;
 
 public class Test {
 
-    public static PotentialUpdate potentialUpdate = null;
-    public static UpdateContext updateContext;
-    public static CompletableFuture<?> future;
+    public PotentialUpdate potentialUpdate = null;
+    public UpdateContext updateContext;
+    public CompletableFuture<?> future;
 
-    public Test() {
+
+    public void checkUpdate() {
         updateContext = new UpdateContext(
                 UpdateSource.githubUpdateSource("1minify", "SkyMini"),
                 UpdateTarget.deleteAndSaveInTheSameFolder(this.getClass()),
                 CurrentVersion.ofTag(Main.VERSION),
                 Main.MODID
         );
-    }
-
-    public static void checkUpdate() {
         String updateStream = "full"; //none //beta //full
         future = updateContext.checkUpdate(updateStream)
                 .thenAcceptAsync(updateResult -> {
@@ -38,7 +36,18 @@ public class Test {
                 }, ExecutorService.onThisThread());
     }
 
-    public static void loadUpdate() {
+    /*public CompletableFuture<Void> launchUpdate() {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                this.executeUpdate();
+                return null;
+            } catch (IOException var2) {
+                throw new CompletionException(var2);
+            }
+        });
+    }*/
+
+    public void loadUpdate() {
         new Thread(() -> {
             try {
                 potentialUpdate.prepareUpdate();
