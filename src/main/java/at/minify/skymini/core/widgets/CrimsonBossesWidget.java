@@ -10,7 +10,7 @@ public class CrimsonBossesWidget extends Widget {
 
     @Override
     public boolean isEnabled() {
-        return Crimson.displaybosses;
+        return Crimson.displayDailyBossWidget;
     }
 
 }

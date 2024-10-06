@@ -27,7 +27,7 @@ public class CropUtilities {
         IBlockState blockState = world.getBlockState(pos);
         Integer ageValue = (Integer) blockState.getValue((IProperty) BlockCrops.AGE);
         BlockAccessor accessor = (BlockAccessor)block;
-        if (Main.getAPI().inSkyBlock && Garden.hitboxes || mc.isSingleplayer() && Garden.hitboxes) {
+        if (Main.getAPI().inSkyBlock && Garden.customHitBox || mc.isSingleplayer() && Garden.customHitBox) {
             accessor.setMaxY((blockState
                     .getBlock() instanceof net.minecraft.block.BlockPotato || blockState.getBlock() instanceof net.minecraft.block.BlockCarrot) ?
                     (CARROT_POTATO_BOX[ageValue.intValue()]).maxY :
@@ -38,7 +38,7 @@ public class CropUtilities {
     }
 
     public static void updateWartMaxY(World world, BlockPos pos, Block block) {
-        ((BlockAccessor)block).setMaxY(Main.getAPI().inSkyBlock && Garden.hitboxes || mc.isSingleplayer() && Garden.hitboxes ? NETHER_WART_BOX[((Integer)world.getBlockState(pos).getValue((IProperty) BlockNetherWart.AGE))].maxY : 0.25D);
+        ((BlockAccessor)block).setMaxY(Main.getAPI().inSkyBlock && Garden.customHitBox || mc.isSingleplayer() && Garden.customHitBox ? NETHER_WART_BOX[((Integer)world.getBlockState(pos).getValue((IProperty) BlockNetherWart.AGE))].maxY : 0.25D);
     }
 
 }

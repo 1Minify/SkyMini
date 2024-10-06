@@ -7,7 +7,7 @@ public class BossWidget extends Widget {
 
     @Override
     public boolean isEnabled() {
-        if(!Display.displayboss) {
+        if(!Display.displayBossWidget) {
             return false;
         }
         return super.isEnabled();

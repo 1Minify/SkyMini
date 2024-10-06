@@ -33,7 +33,7 @@ public class DungeonChatListener {
     public void onChatReceived(ClientChatReceivedEvent event) {
         String message = EnumChatFormatting.getTextWithoutFormattingCodes(event.message.getUnformattedText());
         message = Chat.uncolored(message);
-        if(Dungeon.dungeonmsg) {
+        if(Dungeon.cleanDungeonChat) {
             if (message.contains("You picked up a ") || message.contains("Inventory full? Don") || message.contains("Press DROP to activate it!") || message.contains("have enough space in your inventory") || message.contains("There are blocks in the way!") || message.contains("Kill Combo")) {
                 event.setCanceled(true);
             }
@@ -66,10 +66,10 @@ public class DungeonChatListener {
         }
         else if (message.contains("BLOOD DOOR has been opened")) {
             dungeonScoreboard.key = "";
-            dungeonScoreboard.bloodtime = Dungeon.brtime;
+            dungeonScoreboard.bloodtime = Dungeon.bloodTimerTime;
             rushtime = formatTime(dungeonScoreboard.time);
-            if(Dungeon.sendbr && !playingSolo()) {
-                Chat.sendChat("/pchat " + Dungeon.brmessage.replaceAll("%time%", showTime(formatTime(time))).replaceAll("%keys%",dungeonScoreboard.keys + ""));
+            if(Dungeon.sendBloodRushMessage && !playingSolo()) {
+                Chat.sendChat("/pchat " + Dungeon.bloodRushMessage.replaceAll("%time%", showTime(formatTime(time))).replaceAll("%keys%",dungeonScoreboard.keys + ""));
             }
         }
         else if (message.contains("opened a WITHER door")) {
@@ -80,14 +80,14 @@ public class DungeonChatListener {
 
     @SubscribeEvent
     public void tick(MiniTickEvent event) {
-        if (dungeonscore >= 270 && !sscore && Dungeon.sendS && !playingSolo()) {
+        if (dungeonscore >= 270 && !sscore && Dungeon.sendSScoreMessage && !playingSolo()) {
             sscore = true;
-            Chat.sendChat("/pchat " + Dungeon.Smessage.replaceAll("%time%", showTime(formatTime(time))).replaceAll("%needed%", showTime(formatTime(time) - rushtime)));
+            Chat.sendChat("/pchat " + Dungeon.sScoreMessage.replaceAll("%time%", showTime(formatTime(time))).replaceAll("%needed%", showTime(formatTime(time) - rushtime)));
             stime = formatTime(time);
         }
-        if (dungeonscore >= 300 && !ssscore && Dungeon.sendSS && !playingSolo()) {
+        if (dungeonscore >= 300 && !ssscore && Dungeon.sendSSScoreMessage && !playingSolo()) {
             ssscore = true;
-            Chat.sendChat("/pchat " + Dungeon.SSmessage.replaceAll("%time%", showTime(formatTime(time))).replaceAll("%rush%", showTime(formatTime(time) - rushtime)).replaceAll("%270%", showTime(formatTime(time) - stime)));
+            Chat.sendChat("/pchat " + Dungeon.ssScoreMessage.replaceAll("%time%", showTime(formatTime(time))).replaceAll("%rush%", showTime(formatTime(time) - rushtime)).replaceAll("%270%", showTime(formatTime(time) - stime)));
         }
         if(!event.second(1)) {
             return;
@@ -123,7 +123,7 @@ public class DungeonChatListener {
     public String showTime(int value) {
         int min = value / 60;
         int sec = value % 60;
-        if(Dungeon.timeformat == 2) {
+        if(Dungeon.bloodRushTimeFormat == 2) {
             if(min > 0) {
                 return min + "m " + sec + "s";
             }

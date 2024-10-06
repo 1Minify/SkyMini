@@ -14,17 +14,17 @@ public class Crimson {
     @ConfigOption(name = "Quests Display", desc = "Show Crimson daily quests from §dCommunity Center")
     @ConfigEditorBoolean
     @ConfigAccordionId(id = 1)
-    public static boolean displayquests = true;
+    public static boolean displayQuestWidget = true;
 
     @ConfigOption(name = "Bosses Display", desc = "Show Crimson daily bosses for §5Reputation")
     @ConfigEditorBoolean
     @ConfigAccordionId(id = 1)
-    public static boolean displaybosses = true;
+    public static boolean displayDailyBossWidget = true;
 
     @ConfigOption(name = "Show only needed", desc = "Show only needed crimson dailys and bosses")
     @ConfigEditorBoolean
     @ConfigAccordionId(id = 1)
-    public static boolean displayall = false;
+    public static boolean displayAll = false;
 
     @ConfigOption(name = "Kuudra", desc = "")
     @ConfigEditorAccordion(id = 2)
@@ -33,6 +33,6 @@ public class Crimson {
     @ConfigOption(name = "Kuudra Display", desc = "Create a Custom Actionbar for Kuudra events")
     @ConfigEditorBoolean
     @ConfigAccordionId(id = 2)
-    public static boolean displaykuudra = true;
+    public static boolean displayKuudraWidget = true;
 
 }

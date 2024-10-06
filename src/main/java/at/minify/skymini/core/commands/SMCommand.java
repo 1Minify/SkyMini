@@ -12,6 +12,9 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraftforge.common.MinecraftForge;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import static at.minify.skymini.Main.GUIConfigMoulConfigProcessor;
 
 public class SMCommand extends MiniCommand {
@@ -37,7 +40,29 @@ public class SMCommand extends MiniCommand {
             Main.screenToOpen = new GuiScreenElementWrapper(new MoulConfigEditor<>(GUIConfigMoulConfigProcessor));
         }
         if(sub.equalsIgnoreCase("updatee")) {
+            UpdateManager.disableSSL();
             UpdateManager.checkUpdate();
+            //new Test().checkUpdate();
+            //UpdateManager.checkUpdate();
+        }
+        if(sub.equalsIgnoreCase("showsb")) {
+            for (String line : Main.getAPI().scoreboardData) {
+                if(line.contains(sub2)) {
+                    Chat.send(line.replaceAll("§", "\\$"));
+                    System.out.println(line);
+                    return;
+                }
+            }
+            Chat.send("Found no line with: " + sub2);
+        }
+        if(sub.equalsIgnoreCase("updater")) {
+            try {
+                UpdateManager.createProcess();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
         }
         if(sub.equalsIgnoreCase("server")) {
             Chat.send("Aktueller Server: §e" + Main.getAPI().server.name());

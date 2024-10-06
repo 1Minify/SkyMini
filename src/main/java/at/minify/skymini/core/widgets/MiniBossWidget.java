@@ -10,6 +10,6 @@ public class MiniBossWidget extends Widget {
 
     @Override
     public boolean isEnabled() {
-        return Slayer.displayminiboss;
+        return Slayer.displayMiniBoss;
     }
 }

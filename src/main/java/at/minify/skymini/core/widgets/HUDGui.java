@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.opengl.GL11;
 
-import static at.minify.skymini.core.GUI.functions.setx;
+import static at.minify.skymini.core.GUI.functions.getX;
 
 @MiniRegistry(server = Server.SKYBLOCK)
 public class HUDGui {
@@ -37,24 +37,29 @@ public class HUDGui {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onRenderGameOverlay(RenderGameOverlayEvent.Text event) {
-        if(!Display.customHUD) {
+        if(!Display.displayCustomHUD) {
             return;
         }
         if(!Main.getAPI().inSkyBlock) {
             return;
         }
         ScaledResolution scaledRes = new ScaledResolution(Minecraft.getMinecraft());
-        int sclaedX = scaledRes.getScaledWidth();
+        int scaldeX = scaledRes.getScaledWidth();
+
+        GlStateManager.color(1, 1, 1, 1);
+
         Minecraft.getMinecraft().getTextureManager().bindTexture(loc1);
+        GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, sclaedX, 15, sclaedX, 15);
+        Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, scaldeX, 15, scaldeX, 15);
 
         Minecraft.getMinecraft().getTextureManager().bindTexture(loc3);
-        Gui.drawModalRectWithCustomSizedTexture((int) (setx(35)+(time/100*setx(30))-5), 1, 0, 0, 10, 16, 10, 16);
+        Gui.drawModalRectWithCustomSizedTexture((int) (getX(35)+(time/100* getX(30))-5), 1, 0, 0, 10, 16, 10, 16);
 
 
         float scale = 0.8F;
+        GlStateManager.pushMatrix();
         GlStateManager.scale(scale,scale,1);
         renderText("§8" + Main.getAPI().serverId,1);
         renderText(area,2);
@@ -62,22 +67,23 @@ public class HUDGui {
         renderText("§fi%coin%#f3bc30" + scoreboardManager.getPurse() + "#ef6806",4);
         renderText("§fi%bit%#26bce2" + scoreboardManager.getBits() + "#22e479",5);
         renderText("§fi%capy%#30ab12" + Minecraft.getMinecraft().thePlayer.getName() + "#8df623",6);
-        GlStateManager.scale(1/scale,1/scale,1);
+        GlStateManager.popMatrix();
         GL11.glDisable(GL11.GL_BLEND);
+        GL11.glPopMatrix();
     }
 
     private static void renderText(String text, float pos) {
         float addPos = 0;
         if(pos < 4) {
             int positions = 3;
-            float pos1 = (float) setx(35) / positions;
+            float pos1 = (float) getX(35) / positions;
             addPos = (pos1 * pos) * 1.2F;
-            WidgetExecutor.renderWidget(text, addPos-setx(7), 5, true, false);
+            WidgetExecutor.renderWidget(text, addPos- getX(7), 5, true, false);
         }
         else {
             int positions = 3;
-            float pos1 = (float) setx(33) / positions;
-            addPos = (setx(65) + pos1 * (pos-3)) * 1.2F;
+            float pos1 = (float) getX(33) / positions;
+            addPos = (getX(65) + pos1 * (pos-3)) * 1.2F;
             WidgetExecutor.renderWidget(text, addPos, 5, true, false);
         }
     }

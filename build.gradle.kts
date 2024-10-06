@@ -192,6 +192,7 @@ tasks.shadowJar {
     archiveClassifier.set("all-dev")
     configurations = listOf(shadowImpl, shadowModImpl)
     relocate("io.github.notenoughupdates.moulconfig", "at.minify.skymini.deps.moulconfig")
+
    doLast {
         configurations.forEach {
             println("Config: ${it.files}")
@@ -199,7 +200,6 @@ tasks.shadowJar {
     }
     exclude("META-INF/versions/**")
 
-    //relocate("io.github.moulberry.moulconfig", "at.hannibal2.${modid}.deps.moulconfig")
     //relocate("moe.nea.libautoupdate", "at.hannibal2.${modid}.deps.libautoupdate")
 }
 

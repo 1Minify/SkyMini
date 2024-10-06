@@ -1,18 +1,10 @@
 package at.minify.skymini.api.frame;
 
-import at.minify.skymini.Main;
-import at.minify.skymini.api.service.ExecutorService;
-import moe.nea.libautoupdate.CurrentVersion;
-import moe.nea.libautoupdate.PotentialUpdate;
-import moe.nea.libautoupdate.UpdateContext;
-import moe.nea.libautoupdate.UpdateSource;
-import moe.nea.libautoupdate.UpdateTarget;
 
-import java.util.concurrent.CompletableFuture;
 
 public class Test {
 
-    public PotentialUpdate potentialUpdate = null;
+    /*public PotentialUpdate potentialUpdate = null;
     public UpdateContext updateContext;
     public CompletableFuture<?> future;
 
@@ -34,7 +26,27 @@ public class Test {
                         loadUpdate();
                     }
                 }, ExecutorService.onThisThread());
-    }
+    }*/
+
+    /*public void loadUpdate() {
+        new Thread(() -> {
+            try {
+                potentialUpdate.prepareUpdate();
+                System.out.println("finished");
+                potentialUpdate.executePreparedUpdate();
+            } catch (Exception e) {
+                throw new RuntimeException("Error: " + e.getMessage(), e);
+            }
+        }).start();
+    }*/
+
+
+
+
+
+
+
+
 
     /*public CompletableFuture<Void> launchUpdate() {
         return CompletableFuture.supplyAsync(() -> {
@@ -46,18 +58,6 @@ public class Test {
             }
         });
     }*/
-
-    public void loadUpdate() {
-        new Thread(() -> {
-            try {
-                potentialUpdate.prepareUpdate();
-                System.out.println("finished");
-                potentialUpdate.executePreparedUpdate();
-            } catch (Exception e) {
-                throw new RuntimeException("Error: " + e.getMessage(), e);
-            }
-        }).start();
-    }
 
     /*public void checkUpdate1() throws IOException {
         String updateStream = "full"; //none //beta //full

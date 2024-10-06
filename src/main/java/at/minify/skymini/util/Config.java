@@ -1,6 +1,9 @@
 package at.minify.skymini.util;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -9,8 +12,8 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Type;
+import java.util.Map;
 
 public class Config {
     public static Configuration config;
@@ -94,7 +97,72 @@ public class Config {
         saveConfig();
     }
 
+
+    public static void saveClass1(Class<?> clazz) {
+        Gson gson = new Gson();
+        Field[] fields = clazz.getDeclaredFields();
+        for (Field field : fields) {
+            if (!Modifier.isStatic(field.getModifiers())) {
+                continue;
+            }
+
+        }
+    }
+
+    public static void loadClass(Class<?> clazz, String category, Configuration config) {
+        Gson gson = new Gson();
+        Field[] fields = clazz.getDeclaredFields();
+        Map<String, Object> fieldMap;
+
+        for (Field field : fields) {
+            if (!Modifier.isStatic(field.getModifiers())) {
+                continue;
+            }
+            field.setAccessible(true);
+            try {
+                Property property = config.get(category, field.getName(), (String) null);
+                if (property != null) {
+                    String jsonValue = property.getString();
+                    Type fieldType = TypeToken.get(field.getType()).getType();
+                    Object value = gson.fromJson(jsonValue, fieldType);
+                    System.out.println("loaded: " + value);
+                    field.set(null, value);
+                }
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     public static void saveClass(Class<?> clazz, String category, Configuration config) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Field[] fields = clazz.getDeclaredFields();
+
+        for (Field field : fields) {
+            if (!Modifier.isStatic(field.getModifiers())) {
+                continue;
+            }
+            field.setAccessible(true);
+            try {
+                Object value = field.get(null);  // Statische Felder verwenden keinen Instanzbezug
+                if (value != null) {
+                    String jsonValue = gson.toJson(value);  // Objekt in JSON umwandeln
+                    Property property = config.get(category, field.getName(), jsonValue);
+                    property.set(jsonValue);  // JSON-Wert in die Config setzen
+                }
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        if (config.hasChanged()) {
+            config.save();
+        }
+    }
+
+
+
+    /*public static void saveClass(Class<?> clazz, String category, Configuration config) {
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
             if(!Modifier.isStatic(field.getModifiers())) {
@@ -117,6 +185,7 @@ public class Config {
                     Property property = config.get(category, field.getName(), field.get(null).toString());
                     property.set(field.get(null).toString()); // Setze den Wert in die Config
                 }  else if (field.getType() == List.class) {
+                    field.setAccessible(true); // Zugriff auf das Feld ermöglichen
                     Property property = config.get(category, field.getName(), field.get(null).toString());
                     property.set(field.get(null).toString()); // Setze den Wert in die Config
                 }
@@ -165,7 +234,7 @@ public class Config {
                 throw new RuntimeException(e);
             }
         }
-    }
+    }*/
 
 
 }

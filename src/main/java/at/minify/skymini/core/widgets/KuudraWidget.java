@@ -10,6 +10,6 @@ public class KuudraWidget extends Widget {
 
     @Override
     public boolean isEnabled() {
-        return Crimson.displaykuudra;
+        return Crimson.displayKuudraWidget;
     }
 }

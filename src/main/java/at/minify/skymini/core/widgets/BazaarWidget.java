@@ -7,7 +7,7 @@ public class BazaarWidget extends Widget {
 
     @Override
     public boolean isEnabled() {
-        if(!Display.displaybzflip) {
+        if(!Display.displayBazaarWidget) {
             return false;
         }
         return super.isEnabled();

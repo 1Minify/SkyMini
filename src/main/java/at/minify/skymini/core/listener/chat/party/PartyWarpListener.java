@@ -38,8 +38,8 @@ public class PartyWarpListener extends MiniEvent {
                 }
                 return;
             }
-            if(at.minify.skymini.core.GUI.categories.Chat.autowarp) {
-                if(matcher.group(2).contains("cancel")) {
+            if(at.minify.skymini.core.GUI.categories.Chat.partyAutoWarp) {
+                if(matcher.group(2).contains("cancel") && !name.equalsIgnoreCase(Minecraft.getMinecraft().thePlayer.getName())) {
                     Chat.sendChat("/pchat Lobby switch canceled!");
                     lobbySwitch = -1;
                 }

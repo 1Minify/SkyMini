@@ -1,5 +1,7 @@
 package at.minify.skymini.api.widgets.manager;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
@@ -16,13 +18,25 @@ public class Images {
     }
 
     public static void loadResources() {
-        loadResource("coin");
-        loadResource("bit");
-        loadResource("capy");
+        loadResource(ResourceCategory.WIDGET, "coin");
+        loadResource(ResourceCategory.WIDGET,"bit");
+        loadResource(ResourceCategory.WIDGET,"capy");
+        loadResource(ResourceCategory.SOCIAL, "github");
     }
 
-    private static void loadResource(String name) {
-        cache.put(name, new ResourceLocation("skymini", "textures/widget/" + name + ".png"));
+    private static void loadResource(ResourceCategory category, String name) {
+        cache.put(name, new ResourceLocation("skymini", "textures/" + category.getFile() + "/" + name + ".png"));
+    }
+
+    @AllArgsConstructor
+    @Getter
+    public enum ResourceCategory {
+
+        WIDGET("widget"),
+        SOCIAL("social");
+
+        String file;
+
     }
 
     /*public static void drawImageWithText(ResourceLocation image, String text, int x, int y) {

@@ -12,7 +12,7 @@ import net.minecraft.client.gui.ScaledResolution;
 
 import java.util.Arrays;
 
-import static at.minify.skymini.core.GUI.functions.setx;
+import static at.minify.skymini.core.GUI.functions.getX;
 
 public class LocationManager extends GuiScreen {
 
@@ -24,7 +24,8 @@ public class LocationManager extends GuiScreen {
 
     private int distanceX, distanceY;
     private Widget dragging = null;
-    boolean magnet = false;
+    private boolean centered = false;
+    boolean magnet = true;
     private int magnetx;
     private int magnety;
 
@@ -42,8 +43,15 @@ public class LocationManager extends GuiScreen {
             if(magnet) {
                 float x1 = getxpercent(mouseX);
                 float y1 = getypercent(mouseY);
-                if(x1 > 48 && x1 < 52) {x = 50;}
-                if(y1 > 48 && y1 < 52) {y = 49;}
+                if(x1 > 48 && x1 < 52) {
+                    x = 50;
+                    dragging.setCentered(true);
+                } else {
+                    dragging.setCentered(centered);
+                }
+                if(y1 > 48 && y1 < 52) {
+                    y = 49;
+                }
             }
             dragging.setX(x);
             dragging.setY(y);
@@ -82,6 +90,7 @@ public class LocationManager extends GuiScreen {
                     distanceX = mouseX - x;
                     distanceY = mouseY - y;
                     dragging = widget;
+                    centered = widget.isCenter();
                     break;
                 }
                 if(mouseButton == 1) {
@@ -108,8 +117,15 @@ public class LocationManager extends GuiScreen {
         if(magnet) {
             float x1 = getxpercent(mouseX);
             float y1 = getypercent(mouseY);
-            if(x1 > 48 && x1 < 52) {x = 50;}
-            if(y1 > 48 && y1 < 52) {y = 49;}
+            if(x1 > 48 && x1 < 52) {
+                x = 50;
+                dragging.setCentered(true);
+            } else {
+                dragging.setCentered(centered);
+            }
+            if(y1 > 48 && y1 < 52) {
+                y = 49;
+            }
         }
         dragging.setX(x);
         dragging.setY(y);
@@ -127,12 +143,12 @@ public class LocationManager extends GuiScreen {
             text = "§eClick here §7to §aactivate §7the §9Magnet mode";
         }
         int length = WidgetManager.stringlength(text);
-        magnetx = setx(50)-length/2;
+        magnetx = getX(50)-length/2;
         magnety = 10+fontheight*2;
-        WidgetExecutor.drawbackground(magnetx,setx(50)+length/2,10,10+fontheight*3-1);
-        drawCenteredString(fontRendererObj,"§dSkyMini Location Editor",setx(50),10,0xFFFFFF);
-        drawCenteredString(fontRendererObj,"§7Center a text with §bRight-Click",setx(50),10+fontheight,0xFFFFFF);
-        drawCenteredString(fontRendererObj,text,setx(50),10+fontheight*2,0xFFFFFF);
+        WidgetExecutor.drawbackground(magnetx, getX(50)+length/2,10,10+fontheight*3-1);
+        drawCenteredString(fontRendererObj,"§dSkyMini Location Editor", getX(50),10,0xFFFFFF);
+        drawCenteredString(fontRendererObj,"§7Center a text with §bRight-Click", getX(50),10+fontheight,0xFFFFFF);
+        drawCenteredString(fontRendererObj,text, getX(50),10+fontheight*2,0xFFFFFF);
     }
 
     public void renderWidgets() {

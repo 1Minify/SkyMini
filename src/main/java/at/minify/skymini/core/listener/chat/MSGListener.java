@@ -33,7 +33,7 @@ public class MSGListener extends MiniEvent {
     }
 
     private void setupTranslation(ClientChatReceivedEvent event, String message) {
-        if(!at.minify.skymini.core.GUI.categories.Chat.translobby) return;
+        if(!at.minify.skymini.core.GUI.categories.Chat.translateLobbyChat) return;
         if(!message.startsWith("[")) return;
         if(!message.contains(":")) return;
         if(!message.contains("]")) return;
@@ -43,7 +43,7 @@ public class MSGListener extends MiniEvent {
     }
 
     private void changeMSG(ClientChatReceivedEvent event, String message) {
-        if(!cmsg) return;
+        if(!customMSGs) return;
         Matcher matcher = Pattern.compile("(.*) (.*?): (.*)").matcher(message);
         if(!matcher.find()) return;
         if(!matcher.group(1).contains("From") && !matcher.group(1).contains("To")) return;
@@ -60,21 +60,21 @@ public class MSGListener extends MiniEvent {
     }
 
     private void changePartyChat(ClientChatReceivedEvent event, String message) {
-        if(!cpchat) return;
+        if(!customPartyChat) return;
         Matcher matcher = Pattern.compile("Party > (.*?): (.*)").matcher(message);
         if(!matcher.find()) return;
-        String pchat = pchatformat;
+        String pchat = partyChatFormat;
         if(!pchat.contains("%name%") || !pchat.contains("%text%")) {
             Chat.send("&7Custom Chat has been &cdisabled &7for reason:");
             Chat.send("&c%name% or %text% not found");
-            cpchat = !cpchat;
+            customPartyChat = !customPartyChat;
             return;
         }
         String nameElement = matcher.group(1);
         String name = Chat.getName(nameElement);
         pchat = pchat.replace("%name%", name).replace("%text%", matcher.group(2)).replace("&", "§");
         event.setCanceled(true);
-        if(at.minify.skymini.core.GUI.categories.Chat.transparty && !name.contains(Minecraft.getMinecraft().thePlayer.getName())) {
+        if(at.minify.skymini.core.GUI.categories.Chat.translatePartyChat && !name.contains(Minecraft.getMinecraft().thePlayer.getName())) {
             TranslateAPI.send("",pchat,"");
         } else {
             send(pchat);
@@ -82,14 +82,14 @@ public class MSGListener extends MiniEvent {
     }
 
     private void changeGuildChat(ClientChatReceivedEvent event, String message) {
-        if(!gchat) return;
+        if(!customGuildChat) return;
         Matcher matcher = Pattern.compile("Guild > (.*?): (.*)").matcher(message);
         if(!matcher.find()) return;
-        String pchat = gchatformat;
+        String pchat = guildChatFormat;
         if(!pchat.contains("%name%") || !pchat.contains("%text%")) {
             Chat.send("&7Guild Chat has been &cdisabled &7for reason:");
             Chat.send("&c%name% or %text% not found");
-            cpchat = !cpchat;
+            customPartyChat = !customPartyChat;
             return;
         }
         String nameElement = matcher.group(1);

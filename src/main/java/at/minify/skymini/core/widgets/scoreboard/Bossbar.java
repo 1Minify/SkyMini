@@ -30,10 +30,10 @@ public class Bossbar {
     public void drawBossBar(List<String> all) {
         FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
         int y = 7;
-        if(Display.customHUD) {
+        if(Display.displayCustomHUD) {
             if(!realBossBar.isEmpty() && !realBossBar.contains("[§c0.3%")) {
                 int fontheight = fontRenderer.FONT_HEIGHT;
-                float x1 = functions.setx(50)-((float) WidgetManager.stringlength(realBossBar)/2);
+                float x1 = functions.getX(50)-((float) WidgetManager.stringlength(realBossBar)/2);
                 float y1 = y+fontheight+2;
                 WidgetExecutor.drawbackground((int) x1, (int) (x1+WidgetManager.stringlength(realBossBar)), (int) y1, (int) (y1+fontheight));
                 fontRenderer.drawStringWithShadow(realBossBar, x1, y1, 0xFFFFFF);
@@ -54,7 +54,7 @@ public class Bossbar {
         }
         if(bossbar.toString().contains("null")) { return; }
         int length = WidgetManager.stringlength(bossbar.toString());
-        int x = functions.setx(50)-(length/2);
+        int x = functions.getX(50)-(length/2);
         if(realBossBar.isEmpty() || realBossBar.contains("[§c0.3%")) {
             int fontheight = fontRenderer.FONT_HEIGHT;
             WidgetExecutor.drawbackground(x,x+length,y,y+fontheight);
@@ -63,7 +63,7 @@ public class Bossbar {
             int fontheight = fontRenderer.FONT_HEIGHT;
             WidgetExecutor.drawbackground(x,x+length,y,y+fontheight*2+2);
             fontRenderer.drawStringWithShadow(bossbar.toString(), x, y, 0xFFFFFF);
-            fontRenderer.drawStringWithShadow(realBossBar, functions.setx(50)-((float) WidgetManager.stringlength(realBossBar)/2), y+fontheight+2, 0xFFFFFF);
+            fontRenderer.drawStringWithShadow(realBossBar, functions.getX(50)-((float) WidgetManager.stringlength(realBossBar)/2), y+fontheight+2, 0xFFFFFF);
         }
     }
 
@@ -71,7 +71,7 @@ public class Bossbar {
     @SideOnly(Side.CLIENT)
     public void onRenderGameOverlay(RenderGameOverlayEvent event) {
         if (event.type == RenderGameOverlayEvent.ElementType.BOSSHEALTH && event.isCancelable()) {
-            if(Display.sbbossbar) {
+            if(Display.customBossBar) {
                 event.setCanceled(true);
             }
         }

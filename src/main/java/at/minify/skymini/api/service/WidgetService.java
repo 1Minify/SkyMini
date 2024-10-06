@@ -2,7 +2,6 @@ package at.minify.skymini.api.service;
 
 import at.minify.skymini.Main;
 import at.minify.skymini.api.widgets.Widget;
-import at.minify.skymini.api.widgets.manager.Images;
 import com.google.gson.Gson;
 import net.minecraftforge.common.config.Configuration;
 
@@ -30,7 +29,6 @@ public class WidgetService {
 
 
     public static void load() {
-        Images.loadResources();
         config = new Configuration(new File(file));
         try {
             config.load();

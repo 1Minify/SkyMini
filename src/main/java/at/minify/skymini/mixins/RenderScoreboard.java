@@ -1,6 +1,5 @@
 package at.minify.skymini.mixins;
 
-import at.minify.skymini.api.api.LicenseAPI;
 import at.minify.skymini.core.GUI.categories.Display;
 import net.minecraftforge.client.GuiIngameForge;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,11 +15,7 @@ public class RenderScoreboard {
 
     @Inject(method = "renderGameOverlay", at = @At("HEAD"))
     private void onRenderGameOverlay(float partialTicks, CallbackInfo ci) {
-        if(!LicenseAPI.hasversion || !LicenseAPI.haslicense) {
-            renderObjective = true;
-        } else {
-            renderObjective = !Display.customsb;
-        }
+        renderObjective = !Display.customScoreboard;
     }
 
     /*@Inject(method = "<init>", at = @At("RETURN"))

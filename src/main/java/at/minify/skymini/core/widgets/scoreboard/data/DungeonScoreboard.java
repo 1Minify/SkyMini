@@ -50,7 +50,7 @@ public class DungeonScoreboard {
         }
         lines.add(time);
         //lines1.add(lines.get(7) + grade);
-        if (Dungeon.scoregrade) {
+        if (Dungeon.DisplayNeededScore) {
             lines.add("§fScore: §b" + score + " §7(" + grade + "§7) &c+" + needed);
         } else {
             lines.add("§fScore: §b" + score + " §7(" + grade + "§7)");
@@ -62,7 +62,7 @@ public class DungeonScoreboard {
         lines.add("players");
         lines.add("§4");
         lines.add("§ewww.hypixel.net");
-        for (int i : Dungeon.scorelist) {
+        for (int i : Dungeon.scoreboardList) {
             if (i <= lines.size() - 1) {
                 String value = lines.get(i);
                 if (value.equals("players")) {

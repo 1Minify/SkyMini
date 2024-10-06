@@ -75,7 +75,7 @@ public class VoidgloomListener {
             if(event.second(1)) {
                 Entity1 = null;
                 spawnedByName = null;
-                Entity = searchEntity("Voidgloom Seraph", Slayer.voidradius, null);
+                Entity = searchEntity("Voidgloom Seraph", Slayer.voidGloomDisplayRadius, null);
                 if(Entity == null) { Entity = searchEntity("Voidling Radical",30,null); }
                 if(Entity == null) { Entity = searchEntity("Voidcrazed Maniac",30,null); }
                 if(Entity == null) { Entity = searchEntity("Voidling Devotee",30,null); }

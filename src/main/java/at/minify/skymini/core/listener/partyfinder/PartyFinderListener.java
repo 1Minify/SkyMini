@@ -51,7 +51,7 @@ public class PartyFinderListener {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void render(RenderGameOverlayEvent.Text event) {
-        if(!Dungeon.partyfinder) {
+        if(!Dungeon.customPartyFinder) {
             return;
         }
         if(!getname().contains("Party Finder")) {

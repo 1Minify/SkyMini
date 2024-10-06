@@ -10,6 +10,6 @@ public class CrimsonQuestsWidget extends Widget {
 
     @Override
     public boolean isEnabled() {
-        return Crimson.displayquests;
+        return Crimson.displayQuestWidget;
     }
 }

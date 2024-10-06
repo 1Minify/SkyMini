@@ -9,8 +9,8 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
 
-import static at.minify.skymini.core.GUI.functions.setx;
-import static at.minify.skymini.core.GUI.functions.sety;
+import static at.minify.skymini.core.GUI.functions.getX;
+import static at.minify.skymini.core.GUI.functions.getY;
 import static at.minify.skymini.core.listener.partyfinder.PartyFinderListener.*;
 import static at.minify.skymini.core.manager.Chat.uncolored;
 
@@ -20,19 +20,19 @@ public class PartyFinderGUI extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawDefaultBackground();
         int fontheight = fontRendererObj.FONT_HEIGHT+1;
-        drawbackground(setx(10),setx(90),sety(10),sety(90),true,false);
-        drawbackground(setx(10)+4,setx(90)-4,sety(10)+4,sety(90)-27,false,false);
-        int x = setx(10)+8;
-        pos = (int) (float) ((setx(90) - 4) - (setx(10) + 4) - 20) /5;
+        drawbackground(getX(10), getX(90), getY(10), getY(90),true,false);
+        drawbackground(getX(10)+4, getX(90)-4, getY(10)+4, getY(90)-27,false,false);
+        int x = getX(10)+8;
+        pos = (int) (float) ((getX(90) - 4) - (getX(10) + 4) - 20) /5;
         for (int i = 0; i < partys.size(); i++) {
             ItemStack item = partys.get(i);
-            int ypos = sety(10) + 15;
+            int ypos = getY(10) + 15;
             int x1 = (int) (float) i * (pos + 4);
-            if(i < 5) { drawbackground(x + x1, x + x1 + pos, sety(10) + 8, sety(45) - 2, false, true); }
+            if(i < 5) { drawbackground(x + x1, x + x1 + pos, getY(10) + 8, getY(45) - 2, false, true); }
             else if(i < 9) {
-                ypos = sety(45) + 9;
+                ypos = getY(45) + 9;
                 x1 = (int) (float) (i-5)*(pos+4);
-                drawbackground(x + x1, x + x1+pos, sety(45) + 2, sety(90) - 31, false, true);
+                drawbackground(x + x1, x + x1+pos, getY(45) + 2, getY(90) - 31, false, true);
             }
             drawStringCenteredScaledMaxWidth(item.getDisplayName(),fontRendererObj,x + x1 + (float) pos /2,ypos,true,pos-4,0xFFFFFF);
             int k = 1;
@@ -59,18 +59,18 @@ public class PartyFinderGUI extends GuiScreen {
             }
             drawStringCenteredScaledMaxWidth(text,fontRendererObj,x + x1 + (float) pos /2,ypos + (k*fontheight)+fontheight,true,pos-4,0xFFFFFF);
         }
-        drawbackground(setx(10)+4,setx(24)+4,sety(90)-24,sety(90)-4,false,false); //Start Queue
-        drawbackground(setx(24)+8,setx(38)+8,sety(90)-24,sety(90)-4,false,false); //Refresh
-        drawbackground(setx(90)-24,setx(90)-4,sety(90)-24,sety(90)-4,false,false); //Search Settings
-        drawbackground(setx(62)-8,setx(90)-28,sety(90)-24,sety(90)-4,false,false); //X
-        drawStringCenteredScaledMaxWidth("Start Queue",fontRendererObj,setx(17)+4,sety(90)-14,true,100,0x298dd6);
+        drawbackground(getX(10)+4, getX(24)+4, getY(90)-24, getY(90)-4,false,false); //Start Queue
+        drawbackground(getX(24)+8, getX(38)+8, getY(90)-24, getY(90)-4,false,false); //Refresh
+        drawbackground(getX(90)-24, getX(90)-4, getY(90)-24, getY(90)-4,false,false); //Search Settings
+        drawbackground(getX(62)-8, getX(90)-28, getY(90)-24, getY(90)-4,false,false); //X
+        drawStringCenteredScaledMaxWidth("Start Queue",fontRendererObj, getX(17)+4, getY(90)-14,true,100,0x298dd6);
         String refreshtext = "Refresh";
         if(refresh != 0) { refreshtext = "Refresh (" + refresh + "s)"; }
-        drawStringCenteredScaledMaxWidth(refreshtext,fontRendererObj,setx(31)+8,sety(90)-14,true,100,0x77e96d);
-        drawStringCenteredScaledMaxWidth("Search Settings",fontRendererObj,setx(76)-18,sety(90)-14,true,100,0x912969);
-        drawStringCenteredScaledMaxWidth("X",fontRendererObj,setx(90)-14,sety(90)-14,true,100,0xb11d1d);
-        drawStringCenteredScaledMaxWidth("§7Searching:",fontRendererObj,setx(50),sety(90)-19,true,100,0xb11d1d);
-        drawStringCenteredScaledMaxWidth(dungeontype + " - " + dungeonfloor,fontRendererObj,setx(50),sety(90)-7,true,100,0x2e9a6c);
+        drawStringCenteredScaledMaxWidth(refreshtext,fontRendererObj, getX(31)+8, getY(90)-14,true,100,0x77e96d);
+        drawStringCenteredScaledMaxWidth("Search Settings",fontRendererObj, getX(76)-18, getY(90)-14,true,100,0x912969);
+        drawStringCenteredScaledMaxWidth("X",fontRendererObj, getX(90)-14, getY(90)-14,true,100,0xb11d1d);
+        drawStringCenteredScaledMaxWidth("§7Searching:",fontRendererObj, getX(50), getY(90)-19,true,100,0xb11d1d);
+        drawStringCenteredScaledMaxWidth(dungeontype + " - " + dungeonfloor,fontRendererObj, getX(50), getY(90)-7,true,100,0x2e9a6c);
     }
     public int pos;
 
@@ -90,20 +90,20 @@ public class PartyFinderGUI extends GuiScreen {
 
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) {
-        if(mouseX > setx(10)+4 && mouseX < setx(24)+4 && mouseY > sety(90)-24 && mouseY < sety(90)-4) { guiclick(45); } //Start Queue
-        if(mouseX > setx(24)+8 && mouseX < setx(38)+8 && mouseY > sety(90)-24 && mouseY < sety(90)-4 && refresh == 0) { guiclick(46); refresh = 4; } //Refresh
-        if(mouseX > setx(62)-8 && mouseX < setx(90)-28 && mouseY > sety(90)-24 && mouseY < sety(90)-4) { guiclick(50); } //Search Settings
-        if(mouseX > setx(90)-24 && mouseX < setx(90)-4 && mouseY > sety(90)-24 && mouseY < sety(90)-4) { guiclick(48); } //X
-        int x = setx(10)+8;
-        pos = (int) (float) ((setx(90) - 4) - (setx(10) + 4) - 20) /5;
+        if(mouseX > getX(10)+4 && mouseX < getX(24)+4 && mouseY > getY(90)-24 && mouseY < getY(90)-4) { guiclick(45); } //Start Queue
+        if(mouseX > getX(24)+8 && mouseX < getX(38)+8 && mouseY > getY(90)-24 && mouseY < getY(90)-4 && refresh == 0) { guiclick(46); refresh = 4; } //Refresh
+        if(mouseX > getX(62)-8 && mouseX < getX(90)-28 && mouseY > getY(90)-24 && mouseY < getY(90)-4) { guiclick(50); } //Search Settings
+        if(mouseX > getX(90)-24 && mouseX < getX(90)-4 && mouseY > getY(90)-24 && mouseY < getY(90)-4) { guiclick(48); } //X
+        int x = getX(10)+8;
+        pos = (int) (float) ((getX(90) - 4) - (getX(10) + 4) - 20) /5;
         int click = -1;
         for (int j = 0; j < partys.size(); j++) {
             if(j < 5) {
                 int x1 = (int) (float) j * (pos + 4);
-                if(mouseX > x + x1 && mouseX < x + x1 + pos && mouseY > sety(10) + 8 && mouseY < sety(45) - 2) { click = j; }
+                if(mouseX > x + x1 && mouseX < x + x1 + pos && mouseY > getY(10) + 8 && mouseY < getY(45) - 2) { click = j; }
             } else if (j < 9) {
                 int x1 = (int) (float) (j-5)*(pos+4);
-                if(mouseX > x+x1 && mouseX < x+x1+pos && mouseY > sety(45) + 2 && mouseY < sety(90) - 31) { click = j; }
+                if(mouseX > x+x1 && mouseX < x+x1+pos && mouseY > getY(45) + 2 && mouseY < getY(90) - 31) { click = j; }
             }//10-16
         }//19-25
         if(click != -1) {

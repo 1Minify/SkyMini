@@ -28,10 +28,14 @@ public class EmanScoreboard {
         if(i != 0) {
             scoreboardManager.lines1.add("§3");
         }
-        scoreboardManager.lines1.add("§fTotal: §a" + stats.get("end.carry.count") + " Kills");
-        if(Display.customHUD) {
-            scoreboardManager.lines1.add(Display.purseformat.replaceAll("%purse%", scoreboardManager.getPurse()));
-            scoreboardManager.lines1.add(Display.bitsformat.replaceAll("%bits%", scoreboardManager.getBits()));
+        String kills = (String) stats.get("end.carry.count");
+        if(kills == null) {
+            kills = "0";
+        }
+        scoreboardManager.lines1.add("§fTotal: §a" + kills + " Kills");
+        if(Display.displayCustomHUD) {
+            scoreboardManager.lines1.add(scoreboardManager.getPurse(Display.purseFormat));
+            scoreboardManager.lines1.add(scoreboardManager.getBits(Display.bitsFormat));
         }
         i = 0;
         for(String line : scoreboardManager.lines) {

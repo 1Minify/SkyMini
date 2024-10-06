@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import static at.minify.skymini.core.GUI.categories.Chat.pchatrank;
+import static at.minify.skymini.core.GUI.categories.Chat.displayPartyRankColor;
 
 public class Chat {
 
@@ -71,7 +71,7 @@ public class Chat {
             playerRank = split[1];
             name = split[2];
         }
-        if(pchatrank) {
+        if(displayPartyRankColor) {
             if(playerRank.contains("[VIP")) {name = "§a" + name;}
             else if(playerRank.contains("[MVP++")) {name = "§6" + name;}
             else if (playerRank.contains("[MVP")) {name = "§b" + name;}

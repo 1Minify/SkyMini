@@ -9,7 +9,7 @@ public class UpdateExecutor {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         Thread.sleep(3000);
-        File updated = new File(System.getProperty("user.dir") + "/config/skymini", "updated.jar");
+        File updated = new File(System.getProperty("user.dir") + "/config/skymini/updater", "updated.jar");
         if(!updated.exists()) return;
         if(args.length == 0) return;
         File current = new File(args[0]).getParentFile();

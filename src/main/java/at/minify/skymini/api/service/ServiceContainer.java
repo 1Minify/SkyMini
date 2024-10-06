@@ -75,7 +75,10 @@ public class ServiceContainer {
 
 
             for (Class<?> clazz : classes) {
-                boolean isMiniEvent = clazz.getSuperclass().equals(MiniEvent.class);
+                boolean isMiniEvent = false;
+                if(clazz.getSuperclass() != null) {
+                    isMiniEvent = clazz.getSuperclass().equals(MiniEvent.class);
+                }
                 boolean hasAnnotation = clazz.isAnnotationPresent(MiniRegistry.class);
                 if(!isMiniEvent && !hasAnnotation) continue;
                 MiniEvent event = null;

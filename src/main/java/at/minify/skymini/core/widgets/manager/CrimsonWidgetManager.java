@@ -54,7 +54,7 @@ public class CrimsonWidgetManager {
                 quests.append("\n0xcc2a2a").append(Chat.uncolored(quest)).append("0x761e1e");}
             else if(quest.contains("§e")) {
                 quests.append("\n0xcc982a").append(Chat.uncolored(quest)).append("0x8d6c26");}
-            else if(quest.contains("§a") && !Crimson.displayall) {
+            else if(quest.contains("§a") && !Crimson.displayAll) {
                 quests.append("\n0x4ccc2a").append(Chat.uncolored(quest)).append("0x2c661c");}
         }
         if(crimsonQuestsWidget != null) crimsonQuestsWidget.setText(quests.toString());
@@ -66,7 +66,7 @@ public class CrimsonWidgetManager {
             String name = getboss(path);
             if(olddate != null && olddate.equalsIgnoreCase("null")) { bosses.append("\n&c0xcc2a2a").append(name).append("0x761e1e"); }
             else if(olddate != null && datedifference(newDate,stringToDate(olddate)) > 0) {
-                if(!Crimson.displayall) {
+                if(!Crimson.displayAll) {
                     bosses.append("\n&a0x4ccc2a").append(name).append("0x2c661c");
                 }
             } else {

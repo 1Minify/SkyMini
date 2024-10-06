@@ -11,12 +11,12 @@ public class Slayer {
     @ConfigOption(name = "Display Radius", desc = "Set how many blocks the voidgloom display should go")
     @ConfigEditorSlider(minValue = 0, maxValue = 15, minStep = 1)
     @ConfigAccordionId(id = 1)
-    public static int voidradius = 0;
+    public static int voidGloomDisplayRadius = 0;
 
     @ConfigOption(name = "Miniboss tracker", desc = "Show Enderman minibosses on the end island")
     @ConfigEditorBoolean
     @ConfigAccordionId(id = 1)
-    public static boolean displayminiboss = true;
+    public static boolean displayMiniBoss = true;
 
 
 

@@ -1,7 +1,7 @@
 package at.minify.skymini.core.GUI;
 
+import at.minify.skymini.api.service.ConfigService;
 import at.minify.skymini.core.GUI.config.GUIConfig;
-import at.minify.skymini.util.Config;
 import io.github.moulberry.moulconfig.annotations.Category;
 
 import java.lang.reflect.Field;
@@ -16,7 +16,9 @@ public class mouldata {
             String input = category.getClass().getName();
             int lastIndex = input.lastIndexOf(".");
             String name = input.substring(lastIndex + 1);
-            Config.loadClass(category.getClass(),"data." + name, Config.config);
+
+            ConfigService.loadClass(category.getClass());
+            //Config.loadClass(category.getClass(),"data." + name, Config.config);
         }
     }
 
@@ -25,9 +27,10 @@ public class mouldata {
             String input = category.getClass().getName();
             int lastIndex = input.lastIndexOf(".");
             String name = input.substring(lastIndex + 1);
-            Config.saveClass(category.getClass(), "data." + name, Config.config);
-            System.out.println(category.getClass().getName());
+            ConfigService.saveClass(category.getClass());
+            //Config.saveClass(category.getClass(), "data." + name, Config.config);
         }
+        ConfigService.saveConfig();
     }
 
     public static List<Object> catlist(GUIConfig guiConfig) {

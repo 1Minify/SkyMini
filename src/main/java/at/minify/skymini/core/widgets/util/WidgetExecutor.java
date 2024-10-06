@@ -51,7 +51,7 @@ public class WidgetExecutor {
         if(Minecraft.getMinecraft().theWorld == null) {
             return;
         }
-        ani += Display.guispeed;
+        ani += Display.guiSpeed;
         if (ani >= 400) {
             ani = 0;
         }
@@ -144,7 +144,7 @@ public class WidgetExecutor {
             return true;
         }
         if(line.contains("§u")) {
-            Gradient.renderchroma(line.replaceAll("0x[0-9A-Fa-f]{6}",""),Math.round(x),Math.round(y),Gradient.chromacolor.getEffectiveColour().getRGB(), Display.chromaprogress);
+            Gradient.renderchroma(line.replaceAll("0x[0-9A-Fa-f]{6}",""),Math.round(x),Math.round(y),Gradient.chromacolor.getEffectiveColour().getRGB(), Display.chromaProgress);
             return false;
         }
         return true;
@@ -172,10 +172,12 @@ public class WidgetExecutor {
 
         Minecraft.getMinecraft().getTextureManager().bindTexture(image);
         GlStateManager.scale(1,1,1);
+        GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         Gui.drawModalRectWithCustomSizedTexture(x+i, y-1, 0, 0, 10, 10, 10, 10);
         GL11.glDisable(GL11.GL_BLEND);
+        GL11.glPopMatrix();
         if(split.length != 3) {
             return false;
         }
@@ -223,7 +225,7 @@ public class WidgetExecutor {
 
     public static void drawbackground(int x, int width, int y, int height) {
         y = y-2;
-        int bgAlpha = getalpha(Display.sbbackground);
+        int bgAlpha = getalpha(Display.widgetBGOpacity);
         int bgColor = (0) | (bgAlpha << 24);
         drawRect(x-4,y-2,width+4,height+3,bgColor);
         drawRect(x-4,y-1,x-5,height+2,bgColor);

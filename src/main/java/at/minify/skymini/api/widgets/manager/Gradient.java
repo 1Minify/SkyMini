@@ -86,7 +86,7 @@ public class Gradient {
 
     public static void tick(MiniTickEvent event) {
         if(event.second(1)) {
-            String chromac = Math.round(255-((float) (Display.chromaspeed-1) /59*255)) + ":0:255:0:255";
+            String chromac = Math.round(255-((float) (Display.chromaSpeed -1) /59*255)) + ":0:255:0:255";
             chromacolor = ChromaColour.forLegacyString(chromac);
         }
     }

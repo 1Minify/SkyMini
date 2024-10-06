@@ -1,6 +1,5 @@
 package at.minify.skymini.mixins;
 
-import at.minify.skymini.api.api.LicenseAPI;
 import at.minify.skymini.core.GUI.categories.Garden;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.EffectRenderer;
@@ -15,7 +14,7 @@ public class BlockBreak {
 
     @Inject(method = "addBlockDestroyEffects", at = @At("HEAD"), cancellable = true)
     public void addBlockDestroyEffects(BlockPos pos, IBlockState state, CallbackInfo ci) {
-        if(Garden.breakani && LicenseAPI.hasversion) {
+        if(Garden.disabledBreakAnimation) {
             ci.cancel();
         }
     }

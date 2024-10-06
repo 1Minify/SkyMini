@@ -107,7 +107,7 @@ public class BazaarWidgetManager {
                     int imoney = itemmoney.getOrDefault(name, 0);
                     String imoney1 = new DecimalFormat("#,##0").format(imoney);
                     String icount1 = new DecimalFormat("#,##0").format(icount);
-                    if(Bazaar.bzitemcoins) {
+                    if(Bazaar.displayItemCoins) {
                         itemdisplay.put(name, "\n&a" + icount1 + "x &70xececec" + name/*.replaceAll("Enchanted ","&lE &r&7")*/ + /*" &8\u00BB*/"0x9b9b9b &6" + Chat.formatNumber(imoney));
                     } else {
                         itemdisplay.put(name, "\n&a" + icount1 + "x &70xececec" + name/*.replaceAll("Enchanted ","&lE &r&7")*/ + "0x9b9b9b");
@@ -183,9 +183,9 @@ public class BazaarWidgetManager {
             if (ticks >= 200) {
                 ticks = 0;
             }
-            if (ticks % 20 == 0 && Display.displaybzflip) {
+            if (ticks % 20 == 0 && Display.displayBazaarWidget) {
                 if(ani.equals("&e")) { ani = "&f"; } else { ani = "&e"; }
-                if(Bazaar.bzshow) {
+                if(Bazaar.displayAlways) {
                     countdown = 2;
                     update = true;
                     //stats.remove("gui.hidden1.bzflip");
@@ -218,7 +218,7 @@ public class BazaarWidgetManager {
                                             text.append(" &8[&cB");
                                         }
                                     }
-                                    if (Bazaar.unitprice) {
+                                    if (Bazaar.displayUnitPrice) {
                                         text.append(buyoffer.get(name) + "&7 " + buyamount.get(name) + "&7x&8]");
                                     } else {
                                         text.append("&7 " + buyamount.get(name) + "&7x&8]");
@@ -239,7 +239,7 @@ public class BazaarWidgetManager {
                                             text.append(" &8[&cS");
                                         }
                                     }
-                                    if (Bazaar.unitprice) {
+                                    if (Bazaar.displayUnitPrice) {
                                         text.append(selloffer.get(name) + "&7 " + sellamount.get(name) + "&7x&8]");
                                     } else {
                                         text.append("&7 " + sellamount.get(name) + "&7x&8]");
